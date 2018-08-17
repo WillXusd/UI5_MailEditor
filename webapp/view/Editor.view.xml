@@ -31,7 +31,7 @@
 									<Input value="{/bcc}" type="Email" placeholder="Enter Email ..." id="iptBCC" />
 									
 									<Label text="Priority" labelFor="ddPriority" required="true"></Label>
-									<Select value="{/priority}" items="{/priorities}" selectedKey="{/priority}" id="ddPriority">
+									<Select  items="{/priorities}" selectedKey="{/priority}" id="ddPriority">
 										<core:Item key="{key}" text="{name}" />
 									</Select>
 									
