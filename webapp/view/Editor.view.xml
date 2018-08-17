@@ -1,0 +1,138 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="UI5_MailEditor.controller.Editor"
+	xmlns:html="http://www.w3.org/1999/xhtml"  xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified" xmlns:l="sap.ui.layout">
+		<Page title="ABInBev Mail Editor" id="mainPage" showFooter="true" showNavButton="true" navButtonPress="onNavBack">
+				<headerContent>
+					<Image src="img/451px-AB_InBev_logo.svg.png" densityAware="false"
+						height="25px">
+					</Image>
+				</headerContent>
+				<content>
+					
+					<l:Grid defaultSpan="L12 M12 S12" width="auto">
+						<l:content>
+							<f:SimpleForm id="formEmailEditor" minWidth="1024"
+								maxContainerCols="1" editable="true" layout="ResponsiveGridLayout"
+								title="Mail editor" labelSpanL="2" labelSpanM="2" emptySpanL="2"
+								emptySpanM="2" columnsL="1" columnsM="1" class="editableForm">
+								<f:content>
+									<Label text="From" labelFor="iptFromEmail" required="true"></Label>
+									<Input value="{/from}" type="Email" placeholder="Enter Email ..." id="iptFromEmail"/>
+									
+									<Label text="Notification to" labelFor="iptNotificationTo" required="false"></Label>
+									<Input value="{/notificationTo}" type="Email" placeholder="Enter Email ..." id="iptNotificationTo"/>
+									
+									<Label text="Reply to" labelFor="iptReplyTo"></Label>
+									<Input value="{/replyTo}" type="Email" placeholder="Enter Email ..." id="iptReplyTo" />
+									
+									<Label text="CC" labelFor="iptCC"></Label>
+									<Input value="{/cc}" type="Email" placeholder="Enter Email ..." id="iptCC" />
+									
+									<Label text="BCC" labelFor="iptBCC"></Label>
+									<Input value="{/bcc}" type="Email" placeholder="Enter Email ..." id="iptBCC" />
+									
+									<Label text="Priority" labelFor="ddPriority" required="true"></Label>
+									<Select value="{/priority}" items="{/priorities}" selectedKey="{/priority}" id="ddPriority">
+										<core:Item key="{key}" text="{name}" />
+									</Select>
+									
+									<Label text="Subject" labelFor="iptSubject" required="true"></Label>
+									<Input value="{/subject}" type="Text" placeholder="Enter Text ..." id="iptSubject" />
+									
+									<Label text="Mail Body" labelFor="iptSubject" required="true"></Label>
+									<Panel id="pnlMailBody"></Panel>
+									
+									<Label text="Add image to mail body" labelFor="fileUploader" required="false"></Label>									
+									<u:FileUploader
+										class="myUploader"
+										id="fileUploader"
+										name="myFileUpload"
+										placeholder="Choose a file for Upload..."
+										buttonOnly="true"
+										uploadOnChange="true"
+										uploadComplete="handleUploadComplete"
+										multiple="false" 
+										buttonText="Choose an image"/>
+										
+									<Label text="Add payment image" labelFor="fileUploader3" required="false" visible="false" id="lblPaymentImage"></Label>									
+									<u:FileUploader
+										class="myUploader"
+										id="fileUploader3"
+										name="myFileUpload"
+										placeholder="Choose a file for Upload..."
+										buttonOnly="true"
+										uploadOnChange="true"
+										uploadComplete="handleUploadComplete3"
+										multiple="false" 
+										buttonText="Choose payment image"
+										visible="false"
+										width="100%"/>	
+									<Button text="Remove payment image" press="removePaymentImage" id="btnRemovePaymentImage" visible="false" class="removeImageButton"/>	
+										
+									<Label text="Attachment" labelFor="fileUploader2" required="false"></Label>
+									<u:FileUploader
+										class="myUploader"
+										id="fileUploader2"
+										name="myFileUpload"
+										placeholder="Choose a file for Upload..."
+										buttonOnly="true"
+										uploadOnChange="true"
+										uploadComplete="handleUploadComplete2"
+										multiple="false" 
+										buttonText="Choose an attachment"/>
+									
+										
+									<Label text="" labelFor="UploadCollection" required="false"></Label>
+									<UploadCollection
+										id="UploadCollection"
+										maximumFilenameLength="55"
+										maximumFileSize="10"
+										multiple="false"
+										showSeparators="All"
+										change="onChange"
+										filenameLengthExceed="onFilenameLengthExceed"
+										fileRenamed="onFileRenamed"
+										fileSizeExceed="onFileSizeExceed"
+										typeMissmatch="onTypeMissmatch"
+										uploadComplete="onUploadComplete"
+										beforeUploadStarts="onBeforeUploadStarts"
+										uploadTerminated="onUploadTerminated"
+										items="{/items}"
+										uploadUrl=""
+										uploadEnabled="false">
+										<items>
+											<UploadCollectionItem
+												documentId="{documentId}"
+												fileName="{fileName}"
+												mimeType="{mimeType}"
+												thumbnailUrl="{thumbnailUrl}"
+												url="{url}"
+												enableEdit="false"
+												enableDelete="false"
+												visibleDelete="false"
+												visibleEdit="false"
+												>
+												
+											</UploadCollectionItem>
+										</items>
+									</UploadCollection>
+									
+									<Label text="" labelFor="btnDeleteAttachment" required="false"></Label>
+									<Button type="Reject" text="Delete attachment" class="rejectButton"
+											press="deleteAttachment" id="btnDeleteAttachment" visible="false"/>
+														
+								</f:content>
+							</f:SimpleForm>
+						</l:content>
+					</l:Grid>
+
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button type="Reject" text="Delete layout" press="deleteLayout" id="btnDelete"  visible="false"/>
+						<Button type="Emphasized" text="Update layout" press="updateLayout" visible="false" id="btnUpdate" />
+						<Button type="Accept" text="Create layout" press="createLayout" visible="false" id="btnCreate" />
+					</Toolbar>
+				</footer>
+			</Page>
+</mvc:View>

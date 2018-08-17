@@ -1,0 +1,176 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="UI5_MailEditor.controller.layout"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<Page title="ABInBev Mail Editor" showFooter="true">
+		<headerContent>
+			<Image src="img/451px-AB_InBev_logo.svg.png" densityAware="false" height="25px"></Image>
+		</headerContent>
+		<content>
+			<l:Grid defaultSpan="L12 M12 S12" width="auto">
+				<l:content>
+					<f:SimpleForm id="form1" minWidth="1024" maxContainerCols="1" editable="true" layout="ResponsiveGridLayout" title="Select Layout"
+						labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="1" class="editableForm">
+						<f:content>
+							<Label id="lblCountry" text="Select Country" labelFor="rbtgCountry"></Label>
+							<RadioButtonGroup columns="5" id="rbtgCountry" selectedIndex="-1" select="selectCountry">
+								<buttons>
+									<RadioButton groupName="GroupA" id="RB1-1" text="NL" enabled="{= ${layoutModel>/land1} === '' }"
+										selected="{= ${layoutModel>/land1} === 'NL'}"/>
+									<RadioButton groupName="GroupA" id="RB1-2" text="BE" enabled="{= ${layoutModel>/land1} === '' }"
+										selected="{= ${layoutModel>/land1} === 'BE'}"/>
+									<RadioButton groupName="GroupA" id="RB1-3" text="DE" enabled="{= ${layoutModel>/land1} === '' }"
+										selected="{= ${layoutModel>/land1} === 'DE'}"/>
+									<RadioButton groupName="GroupA" id="RB1-4" text="FR" enabled="{= ${layoutModel>/land1} === '' }"
+										selected="{= ${layoutModel>/land1} === 'FR'}"/>
+									<RadioButton groupName="GroupA" id="RB1-5" text="LU" enabled="{= ${layoutModel>/land1} === '' }"
+										selected="{= ${layoutModel>/land1} === 'LU'}"/>
+								</buttons>
+							</RadioButtonGroup>
+						</f:content>
+					</f:SimpleForm>
+					<f:SimpleForm id="form3" minWidth="1024" visible="{= ${layoutModel>/land1} === 'BE' || ${layoutModel>/land1} === 'LU'}" maxContainerCols="1"
+						editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="1"
+						class="editableForm">
+						<f:content>
+							<Label id="lblBeerFIInvoice" text="Beer (SD)/FI Invoice" labelFor="rbtgBeerInvoice"></Label>
+							<RadioButtonGroup columns="4" id="rbtgBeerInvoice" selectedIndex="-1" select="selectBeerFIInvoice">
+								<buttons>
+									<RadioButton groupName="GroupB" id="RB3-1" text="Beer (SD)" enabled="{= ${layoutModel>/layoutSD} === ''}"
+										selected="{= ${layoutModel>/layoutSD} === 'DEBETCREDIT'}"/>
+									<RadioButton groupName="GroupB" id="RB3-2" text="FI Invoice" enabled="{= ${layoutModel>/layout} === ''}"
+										selected="{= ${layoutModel>/layout} === 'RENT'}"/>
+								</buttons>
+							</RadioButtonGroup>
+						</f:content>
+					</f:SimpleForm>
+					<!-- Only for FR -->
+					<f:SimpleForm id="form72" minWidth="1024" visible="{= ${layoutModel>/land1} === 'FR'}" maxContainerCols="1" editable="true"
+						layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="1" class="editableForm">
+						<f:content>
+							<Label text="Attachments" labelFor="rbgtAttachments"></Label>
+							<RadioButtonGroup columns="5" id="rbgtAttachments2" selectedIndex="-1" select="selectAttachments">
+								<buttons>
+									<RadioButton id="RB9-1" groupName="GroupJ" text="Single" enabled="{= ${layoutModel>/attachments} === ''}"
+										selected="{= ${layoutModel>/attachments} === 'SINGLE'}"/>
+									<RadioButton id="RB9-2" groupName="GroupJ" text="Multiple" enabled="{= ${layoutModel>/attachments} === ''}"
+										selected="{= ${layoutModel>/attachments} === 'MULTIPLE'}"/>
+								</buttons>
+							</RadioButtonGroup>
+						</f:content>
+					</f:SimpleForm>
+					<!-- Only for: NL, FR (SINGLE), LU (DEBITCREDIT)-->
+					<f:SimpleForm id="form2" minWidth="1024"
+						visible="{= ${layoutModel>/land1} === 'NL' || (${layoutModel>/land1} === 'FR' &amp;&amp; ${layoutModel>/attachments} === 'SINGLE') || (${layoutModel>/land1} === 'LU' &amp;&amp; ${layoutModel>/layoutSD} === 'DEBETCREDIT')}"
+						maxContainerCols="1" editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2"
+						columnsM="1" class="editableForm">
+						<f:content>
+							<Label id="lblDebitCredit" text="Debit/Credit" labelFor="rbtgDebitCredit"></Label>
+							<RadioButtonGroup columns="4" id="rbtgDebitCredit" selectedIndex="-1" select="selectDebitCredit">
+								<buttons>
+									<RadioButton groupName="GroupC" text="Debit" selected="{= ${layoutModel>/layout} === 'DEBET'}"/>
+									<RadioButton groupName="GroupC" text="Credit" selected="{= ${layoutModel>/layout} === 'CREDIT'}"/>
+								</buttons>
+							</RadioButtonGroup>
+						</f:content>
+					</f:SimpleForm>
+					<!-- Only for: DE  -->
+					<f:SimpleForm id="form6" minWidth="1024" visible="{= ${layoutModel>/land1} === 'DE'}" maxContainerCols="1" editable="true"
+						layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="1" class="editableForm">
+						<f:content>
+							<Label text="Company Code" labelFor="rbgtCountryCode"></Label>
+							<RadioButtonGroup columns="5" id="rbgtCountryCode" selectedIndex="-1" select="selectCountryCode">
+								<buttons>
+									<RadioButton id="RB6-1" groupName="GroupE" text="DE20" enabled="{= ${layoutModel>/bukrs} === '' }"
+										selected="{= ${layoutModel>/bukrs} === 'DE20'}"/>
+									<RadioButton id="RB6-2" groupName="GroupE" text="DE91" enabled="{= ${layoutModel>/bukrs} === '' }"
+										selected="{= ${layoutModel>/bukrs} === 'DE91'}"/>
+									<RadioButton id="RB6-3" groupName="GroupE" text="DE92" enabled="{= ${layoutModel>/bukrs} === '' }"
+										selected="{= ${layoutModel>/bukrs} === 'DE92'}"/>
+									<RadioButton id="RB6-4" groupName="GroupE" text="DE11" enabled="{= ${layoutModel>/bukrs} === '' }"
+										selected="{= ${layoutModel>/bukrs} === 'DE11'}"/>
+								</buttons>
+							</RadioButtonGroup>
+						</f:content>
+					</f:SimpleForm>
+					<!-- Only for: BE (DEBETCREDIT)  -->
+					<f:SimpleForm id="form4" minWidth="1024"
+						visible="{= ${layoutModel>/land1} === 'BE' &amp;&amp; (${layoutModel>/layoutSD} === 'DEBETCREDIT')}" maxContainerCols="1" editable="true"
+						layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2" columnsM="1" class="editableForm">
+						<f:content>
+							<Label text="Invoice / Credit note" labelFor="rbgtInvoiceCreditNote"></Label>
+							<RadioButtonGroup columns="5" selectedIndex="-1" id="rbgtInvoiceCreditNote" select="selectInvoiceCreditNote">
+								<buttons>
+									<RadioButton id="RB4-1" groupName="GroupF" text="Invoice" enabled="{= ${layoutModel>/layout} === ''}"
+										selected="{= ${layoutModel>/layout} === 'DEBET'}"/>
+									<RadioButton id="RB4-2" groupName="GroupF" text="Credit note" enabled="{= ${layoutModel>/layout} === ''}"
+										selected="{= ${layoutModel>/layout} === 'CREDIT'}"/>
+									<RadioButton id="RB4-3" groupName="GroupF" text="Multiple" enabled="{= ${layoutModel>/layout} === ''}"
+										selected="{= ${layoutModel>/layout} === 'MULTIPLE'}"/>
+								</buttons>
+							</RadioButtonGroup>
+						</f:content>
+					</f:SimpleForm>
+					<!-- Only for: BE (RENT),  -->
+					<f:SimpleForm id="form5" minWidth="1024" visible="{= ${layoutModel>/land1} === 'BE' &amp;&amp; ${layoutModel>/layout} !== ''}"
+						maxContainerCols="1" editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2"
+						columnsM="1" class="editableForm">
+						<f:content>
+							<Label text="Language" labelFor="rbgtLanguage"></Label>
+							<RadioButtonGroup columns="5" id="rbgtLanguage" selectedIndex="-1" select="selectLanguage">
+								<buttons>
+									<RadioButton id="RB5-1" groupName="GroupG" text="NL" selected="{= ${layoutModel>/spras} === 'NL'}"/>
+									<RadioButton id="RB5-2" groupName="GroupG" text="FR" selected="{= ${layoutModel>/spras} === 'FR'}"/>
+									<RadioButton id="RB5-3" groupName="GroupG" text="EN" visible="{= ${layoutModel>/layout} !== 'RENT'}"
+										selected="{= ${layoutModel>/spras} === 'EN'}"/>
+								</buttons>
+							</RadioButtonGroup>
+						</f:content>
+					</f:SimpleForm>
+					<!-- Only for DE -->
+					<f:SimpleForm id="form8" minWidth="1024" visible="{= ${layoutModel>/land1} === 'DE' &amp;&amp; ${layoutModel>/bukrs} !== ''}"
+						maxContainerCols="1" editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2"
+						columnsM="1" class="editableForm">
+						<f:content>
+							<Label text="Language" labelFor="rbgtDELanguage"></Label>
+							<RadioButtonGroup columns="5" id="rbgtDELanguage" selectedIndex="-1" select="selectDELanguage">
+								<buttons>
+									<RadioButton id="RB8-1" groupName="GroupH" text="DE" enabled="{= ${layoutModel>/spras} === ''}"
+										selected="{= ${layoutModel>/spras} === 'DE'}"/>
+									<RadioButton id="RB8-2" groupName="GroupH" text="EN" enabled="{= ${layoutModel>/spras} === ''}"
+										selected="{= ${layoutModel>/spras} === 'EN'}"/>
+								</buttons>
+							</RadioButtonGroup>
+						</f:content>
+					</f:SimpleForm>
+					<!-- Only for BE, FR & DE -->
+					<f:SimpleForm id="form7" minWidth="1024" visible="{= ${layoutModel>/land1} === 'DE' &amp;&amp; ${layoutModel>/spras} !== ''}"
+						maxContainerCols="1" editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2"
+						columnsM="1" class="editableForm attachment">
+						<f:content>
+							<Label text="Attachments" labelFor="rbgtAttachments"></Label>
+							<RadioButtonGroup columns="5" id="rbgtAttachments" selectedIndex="-1" select="selectAttachments">
+								<buttons>
+									<RadioButton id="RB7-1" groupName="GroupI" text="Single" selected="{= ${layoutModel>/attachments} === 'SINGLE'}"/>
+									<RadioButton id="RB7-2" groupName="GroupI" text="Multiple" selected="{= ${layoutModel>/attachments} === 'MULTIPLE'}"/>
+								</buttons>
+							</RadioButtonGroup>
+						</f:content>
+					</f:SimpleForm>
+				</l:content>
+			</l:Grid>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Button text="Clear" press="onClear" />
+				<Button id="btnEditLayout" type="Emphasized" text="Edit Layout"
+					press="navigate"
+					enabled="{= (${layoutModel>/land1} === 'NL' &amp;&amp; ${layoutModel>/layout} !== '') 
+					|| (${layoutModel>/land1} === 'BE' &amp;&amp; ${layoutModel>/layout} !== '' &amp;&amp; ${layoutModel>/spras} !== '') 
+					|| (${layoutModel>/land1} === 'DE' &amp;&amp; ${layoutModel>/attachments} !== '')
+					|| (${layoutModel>/land1} === 'LU' &amp;&amp; ${layoutModel>/layout} !== '')
+					|| (${layoutModel>/land1} === 'FR' &amp;&amp; ${layoutModel>/layout} !== '')
+					|| (${layoutModel>/land1} === 'FR' &amp;&amp; ${layoutModel>/attachments} === 'MULTIPLE')}" />
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>
