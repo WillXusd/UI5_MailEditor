@@ -161,7 +161,7 @@
 		<footer>
 			<Toolbar>
 				<ToolbarSpacer />
-				<Button text="Clear" press="onClear" />
+				<Button text="Clear" press="onClear" id="btnClean"/>
 				<Button id="btnEditLayout" type="Emphasized" text="Edit Layout"
 					press="navigate"
 					enabled="{= (${layoutModel>/land1} === 'NL' &amp;&amp; ${layoutModel>/layout} !== '') 

@@ -13,6 +13,7 @@ sap.ui.define([
 				window.history.go(-1);
 			}
 	}
+	
 	});
 
 });

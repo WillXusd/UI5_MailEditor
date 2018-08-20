@@ -106,19 +106,19 @@
 												mimeType="{mimeType}"
 												thumbnailUrl="{thumbnailUrl}"
 												url="{url}"
-												enableEdit="false"
-												enableDelete="false"
-												visibleDelete="false"
-												visibleEdit="false"
+												enableEdit="true"
+												enableDelete="true"
+												visibleDelete="true"
+												visibleEdit="true"
 												>
 												
 											</UploadCollectionItem>
 										</items>
 									</UploadCollection>
 									
-									<Label text="" labelFor="btnDeleteAttachment" required="false"></Label>
+									<Label text="" labelFor="btnDeleteAttachment" required="true"></Label>
 									<Button type="Reject" text="Delete attachment" class="rejectButton"
-											press="deleteAttachment" id="btnDeleteAttachment" visible="false"/>
+											press="deleteAttachment" id="btnDeleteAttachment" visible="true"/>
 														
 								</f:content>
 							</f:SimpleForm>
@@ -129,9 +129,9 @@
 				<footer>
 					<Toolbar>
 						<ToolbarSpacer/>
-						<Button type="Reject" text="Delete layout" press="deleteLayout" id="btnDelete"  visible="false"/>
-						<Button type="Emphasized" text="Update layout" press="updateLayout" visible="false" id="btnUpdate" />
-						<Button type="Accept" text="Create layout" press="createLayout" visible="false" id="btnCreate" />
+						<Button type="Reject" text="Delete layout" press="deleteLayout" id="btnDelete"  visible="true"/>
+						<Button type="Emphasized" text="Update layout" press="updateLayout" visible="true" id="btnUpdate" />
+						<Button type="Accept" text="Create layout" press="createLayout" visible="true" id="btnCreate" />
 					</Toolbar>
 				</footer>
 			</Page>
